@@ -2,6 +2,7 @@
 
 class Konfigator:
 
+
     def __init__(self):
         self._determineCmdArgs()
         self._determineAbsPathForKernel()
