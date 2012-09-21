@@ -13,6 +13,10 @@ class Konfigator:
 
 
     def _determineCmdArgs(self):
+        """
+        Parses and saves the command line arguments to fields
+        '_namespaceCmdArgs' and '_dictCmdArgs'.
+        """
         import argparse
 
         argument_parser = argparse.ArgumentParser(
