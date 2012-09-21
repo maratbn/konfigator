@@ -1,17 +1,18 @@
 #!/usr/bin/python
 
-import argparse
+def getCmdArgs():
+    import argparse
 
-argument_parser = argparse.ArgumentParser(
+    argument_parser = argparse.ArgumentParser(
                         description='Search the Linux kernel Kconfig files.')
 
-argument_parser.add_argument(
-    '-k', '--kernel',
-    default='/usr/src/linux/',
-    help='path to the Linux kernel source tree to search (default: %(default)s)',
-    metavar='path')
+    argument_parser.add_argument(
+        '-k', '--kernel',
+        default='/usr/src/linux/',
+        help='path to the Linux kernel source tree to search (default: %(default)s)',
+        metavar='path')
 
-args = argument_parser.parse_args()
+    return argument_parser.parse_args()
 
-
+args = getCmdArgs()
 print args
