@@ -4,13 +4,20 @@ class Konfigator:
 
     def __init__(self):
         self._determineCmdArgs()
+        self._determineAbsPathForKernel()
 
+        print 'abs path:', self._strAbsPathForKernel
+
+
+    def _determineAbsPathForKernel(self):
+        """
+        Determines the absolute path to the linux kernel sources based on the
+        value specified via command line args, and saves it to the field
+        '_strAbsPathForKernel'.
+        """
         import os.path
-
-        strAbsPath = os.path.abspath(self._dictCmdArgs['kernel'])
-
-        print 'abs path:', strAbsPath
-
+        self._strAbsPathForKernel = os.path.abspath(
+                                                   self._dictCmdArgs['kernel'])
 
     def _determineCmdArgs(self):
         """
