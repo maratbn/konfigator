@@ -8,7 +8,6 @@ class Konfigator:
         self._determineAbsPathForKernel()
         print 'abs path:', self._strAbsPathForKernel
 
-
     def _determineAbsPathForKernel(self):
         """
         Determines the absolute path to the linux kernel sources based on the
