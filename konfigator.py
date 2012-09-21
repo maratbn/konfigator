@@ -14,5 +14,5 @@ def getCmdArgs():
 
     return argument_parser.parse_args()
 
-args = getCmdArgs()
-print args
+cmd_args = getCmdArgs()
+print cmd_args
