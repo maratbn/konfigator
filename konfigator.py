@@ -3,17 +3,16 @@
 class Konfigator:
 
     def __init__(self):
-        cmd_args = vars(self.getCmdArgs())
-        print cmd_args
+        self._determineCmdArgs()
 
         import os.path
 
-        strAbsPath = os.path.abspath(cmd_args['kernel'])
+        strAbsPath = os.path.abspath(self._dictCmdArgs['kernel'])
 
         print 'abs path:', strAbsPath
 
 
-    def getCmdArgs(self):
+    def _determineCmdArgs(self):
         import argparse
 
         argument_parser = argparse.ArgumentParser(
@@ -25,6 +24,8 @@ class Konfigator:
             help='path to the Linux kernel source tree to search (default: %(default)s)',
             metavar='path')
 
-        return argument_parser.parse_args()
+        self._namespaceCmdArgs = argument_parser.parse_args()
+        self._dictCmdArgs = vars(self._namespaceCmdArgs)
+
 
 Konfigator()
