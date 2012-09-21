@@ -14,5 +14,11 @@ def getCmdArgs():
 
     return argument_parser.parse_args()
 
-cmd_args = getCmdArgs()
+cmd_args = vars(getCmdArgs())
 print cmd_args
+
+import os.path
+
+strAbsPath = os.path.abspath(cmd_args['kernel'])
+
+print 'abs path:', strAbsPath
