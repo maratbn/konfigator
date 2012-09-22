@@ -74,10 +74,12 @@ class Konfigator:
                     return None
 
             def _scanFile(strFilename):
+                listLines = list()
                 file = open(strFilename, 'rU')
                 for line in file:
-                    print line,
+                    listLines.append(line)
                 file.close()
+                return listLines
 
             listDirItems = _getDirListing()
             if (depth == 0 and listDirItems is None):
@@ -96,7 +98,9 @@ to search.')
                 elif os.path.isfile(strPathItem):
                     if strItem == 'Kconfig' or strItem.find('Kconfig.') == 0:
                         print strPathItem
-                        _scanFile(strPathItem)
+                        listLines = _scanFile(strPathItem)
+                        for strLine in listLines:
+                            print strLine,
 
         _scanDir(self._strAbsPathForKernel)
 
