@@ -87,7 +87,8 @@ to search.')
                 if os.path.isdir(strPathItem):
                     _scanDir(strPathItem, depth + 1)
                 elif os.path.isfile(strPathItem):
-                    print strPathItem
+                    if strItem == 'Kconfig' or strItem.find('Kconfig.') == 0:
+                        print strPathItem
 
         _scanDir(self._strAbsPathForKernel)
 
