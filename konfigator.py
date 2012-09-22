@@ -60,16 +60,16 @@ class Konfigator:
         """
         Scans through the Linux source tree for the 'Kconfig' files.
         """
-        def _getDirListing():
+        def _getDirListing(strPath):
             import os
             try:
-                return os.listdir(self._strAbsPathForKernel)
+                return os.listdir(strPath)
             except OSError as o_s_error:
                 import sys
                 print >> sys.stderr, 'konfigator:  ' + str(o_s_error)
                 return None
 
-        listDirItems = _getDirListing()
+        listDirItems = _getDirListing(self._strAbsPathForKernel)
         if (depth == 0 and listDirItems is None):
             import sys
             print >> sys.stderr, ('konfigator:  Encountered an operating \
