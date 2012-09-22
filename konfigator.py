@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#   Konfigator -- Searches the Linux kernel Kconfig files.
+#   Konfigator -- Searches the Linux kernel source tree Kconfig files.
 #
 #   Copyright (C) 2012  Marat Nepomnyashy  maratbn@gmail
 #
@@ -47,7 +47,7 @@ class Konfigator:
         """
         import argparse
         argument_parser = argparse.ArgumentParser(
-                        description='Search the Linux kernel Kconfig files.')
+                        description='Search the Linux kernel source tree Kconfig files.')
         argument_parser.add_argument(
             '-k', '--kernel',
             default='/usr/src/linux/',
