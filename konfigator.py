@@ -83,9 +83,10 @@ to search.')
             for strItem in listDirItems:
                 strPathItem = strPathDir + os.sep + strItem
                 print strPathItem
+                if os.path.islink(strPathItem):
+                    continue
                 if os.path.isdir(strPathItem):
-                    if not os.path.islink(strPathItem):
-                        _scanDir(strPathItem, depth + 1)
+                    _scanDir(strPathItem, depth + 1)
 
         _scanDir(self._strAbsPathForKernel)
 
