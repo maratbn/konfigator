@@ -40,16 +40,18 @@ class Konfigator:
         """
         Scans through the Linux source tree for the 'Kconfig' files.
         """
-        import os
-        try:
-            self._listItems = os.listdir(self._strAbsPathForKernel)
-        except OSError as o_s_error:
-            import sys
-            print >> sys.stderr, 'konfigator:  ' + str(o_s_error)
-            print >> sys.stderr, 'konfigator:  Encountered an operating system error while attempting to \
-open the path \'' + self._strAbsPathForKernel + '\'.  Make sure to specify \
-the correct path to the Linux kernel source tree to search.'
-            exit()
-
+        def _getDirListing():
+            import os
+            try:
+                return os.listdir(self._strAbsPathForKernel)
+            except OSError as o_s_error:
+                import sys
+                print >> sys.stderr, 'konfigator:  ' + str(o_s_error)
+                print >> sys.stderr, ('konfigator:  Encountered an operating \
+system error while attempting to open the path \'' + self._strAbsPathForKernel
++ '\'.  Make sure to specify the correct path to the Linux kernel source tree \
+to search.')
+                exit()
+        self._listItems = _getDirListing()
 
 Konfigator()
