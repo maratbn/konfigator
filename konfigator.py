@@ -62,9 +62,9 @@ class Konfigator:
         """
  
         def _scanDir(strPath, depth=0):
+            import os
 
             def _getDirListing():
-                import os
                 try:
                     return os.listdir(strPath)
                 except OSError as o_s_error:
@@ -81,7 +81,8 @@ system error while attempting to open the path \'' + self._strAbsPathForKernel
 to search.')
                 sys.exit(1)
             for strItem in listDirItems:
-                print strItem
+                strPathItem = strPath + os.sep + strItem
+                print strPathItem
 
         _scanDir(self._strAbsPathForKernel)
 
