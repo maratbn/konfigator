@@ -61,12 +61,12 @@ class Konfigator:
         Scans through the Linux source tree for the 'Kconfig' files.
         """
  
-        def _scanDir(strPath, depth=0):
+        def _scanDir(strPathDir, depth=0):
             import os
 
             def _getDirListing():
                 try:
-                    return os.listdir(strPath)
+                    return os.listdir(strPathDir)
                 except OSError as o_s_error:
                     import sys
                     print >> sys.stderr, 'konfigator:  ' + str(o_s_error)
@@ -81,7 +81,7 @@ system error while attempting to open the path \'' + self._strAbsPathForKernel
 to search.')
                 sys.exit(1)
             for strItem in listDirItems:
-                strPathItem = strPath + os.sep + strItem
+                strPathItem = strPathDir + os.sep + strItem
                 print strPathItem
 
         _scanDir(self._strAbsPathForKernel)
