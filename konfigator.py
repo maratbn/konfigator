@@ -77,7 +77,8 @@ class Konfigator:
                 listLines = list()
                 file = open(strFilename, 'rU')
                 for strLine in file:
-                    listLines.append(strLine)
+                    dictLine = {'orig': strLine}
+                    listLines.append(dictLine)
                 file.close()
                 return listLines
 
@@ -99,8 +100,8 @@ to search.')
                     if strItem == 'Kconfig' or strItem.find('Kconfig.') == 0:
                         print strPathItem
                         listLines = _scanFile(strPathItem)
-                        for strLine in listLines:
-                            print strLine,
+                        for dictLine in listLines:
+                            print dictLine['orig'],
 
         _scanDir(self._strAbsPathForKernel)
 
