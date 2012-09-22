@@ -28,7 +28,6 @@ class Konfigator:
         self._determineCmdArgs()
         self._determineAbsPathForKernel()
         self._scanKconfigFiles()
-        print 'abs path:', self._strAbsPathForKernel
 
     def _determineAbsPathForKernel(self):
         """
