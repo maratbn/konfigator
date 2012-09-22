@@ -6,7 +6,9 @@ class Konfigator:
     def __init__(self):
         self._determineCmdArgs()
         self._determineAbsPathForKernel()
+        self._scanKconfigFiles()
         print 'abs path:', self._strAbsPathForKernel
+        print 'list items:', self._listItems
 
     def _determineAbsPathForKernel(self):
         """
@@ -33,6 +35,21 @@ class Konfigator:
             metavar='path')
         self._namespaceCmdArgs = argument_parser.parse_args()
         self._dictCmdArgs = vars(self._namespaceCmdArgs)
+
+    def _scanKconfigFiles(self):
+        """
+        Scans through the Linux source tree for the 'Kconfig' files.
+        """
+        import os
+        try:
+            self._listItems = os.listdir(self._strAbsPathForKernel)
+        except OSError as o_s_error:
+            import sys
+            print >> sys.stderr, 'konfigator:  ' + str(o_s_error)
+            print >> sys.stderr, 'konfigator:  Encountered an operating system error while attempting to \
+open the path \'' + self._strAbsPathForKernel + '\'.  Make sure to specify \
+the correct path to the Linux kernel source tree to search.'
+            exit()
 
 
 Konfigator()
