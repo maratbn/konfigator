@@ -66,7 +66,9 @@ class Konfigator:
 
             def _getDirListing():
                 try:
-                    return os.listdir(strPathDir)
+                    listDir = os.listdir(strPathDir)
+                    listDir.sort()
+                    return listDir
                 except OSError as o_s_error:
                     import sys
                     print >> sys.stderr, 'konfigator:  ' + str(o_s_error)
