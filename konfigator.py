@@ -56,28 +56,33 @@ class Konfigator:
         self._namespaceCmdArgs = argument_parser.parse_args()
         self._dictCmdArgs = vars(self._namespaceCmdArgs)
 
-    def _scanKconfigFiles(self, depth=0):
+    def _scanKconfigFiles(self):
         """
         Scans through the Linux source tree for the 'Kconfig' files.
         """
-        def _getDirListing(strPath):
-            import os
-            try:
-                return os.listdir(strPath)
-            except OSError as o_s_error:
-                import sys
-                print >> sys.stderr, 'konfigator:  ' + str(o_s_error)
-                return None
+ 
+        def _scanDir(strPath, depth=0):
 
-        listDirItems = _getDirListing(self._strAbsPathForKernel)
-        if (depth == 0 and listDirItems is None):
-            import sys
-            print >> sys.stderr, ('konfigator:  Encountered an operating \
+            def _getDirListing():
+                import os
+                try:
+                    return os.listdir(strPath)
+                except OSError as o_s_error:
+                    import sys
+                    print >> sys.stderr, 'konfigator:  ' + str(o_s_error)
+                    return None
+
+            listDirItems = _getDirListing()
+            if (depth == 0 and listDirItems is None):
+                import sys
+                print >> sys.stderr, ('konfigator:  Encountered an operating \
 system error while attempting to open the path \'' + self._strAbsPathForKernel
 + '\'.  Make sure to specify the correct path to the Linux kernel source tree \
 to search.')
-            sys.exit(1)
-        for strItem in listDirItems:
-            print strItem
+                sys.exit(1)
+            for strItem in listDirItems:
+                print strItem
+
+        _scanDir(self._strAbsPathForKernel)
 
 Konfigator()
