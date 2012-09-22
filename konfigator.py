@@ -73,6 +73,12 @@ class Konfigator:
                     print >> sys.stderr, 'konfigator:  ' + str(o_s_error)
                     return None
 
+            def _scanFile(strFilename):
+                file = open(strFilename, 'rU')
+                for line in file:
+                    print line,
+                file.close()
+
             listDirItems = _getDirListing()
             if (depth == 0 and listDirItems is None):
                 import sys
@@ -90,6 +96,7 @@ to search.')
                 elif os.path.isfile(strPathItem):
                     if strItem == 'Kconfig' or strItem.find('Kconfig.') == 0:
                         print strPathItem
+                        _scanFile(strPathItem)
 
         _scanDir(self._strAbsPathForKernel)
 
