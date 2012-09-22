@@ -55,7 +55,7 @@ class Konfigator:
 system error while attempting to open the path \'' + self._strAbsPathForKernel
 + '\'.  Make sure to specify the correct path to the Linux kernel source tree \
 to search.')
-            exit()
+            sys.exit(1)
         for strItem in listDirItems:
             print strItem
 
