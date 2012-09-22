@@ -74,8 +74,8 @@ class Konfigator:
                     return None
 
             def _scanFile(strFilename):
-                listLines = list()
                 file = open(strFilename, 'rU')
+                listLines = list()
                 for strLine in file:
                     dictLine = {'orig': strLine}
                     listLines.append(dictLine)
