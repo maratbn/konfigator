@@ -80,7 +80,10 @@ class Konfigator:
                 pattern = re.compile(r'^(\s*)(.*)')
                 for strLine in file:
                     match = pattern.match(strLine)
-                    dictLine = {'orig': strLine, 'indent': len(match.group(1))}
+                    dictLine = {
+                        'orig': strLine,
+                        'indent': len(match.group(1)),
+                        'ltrimmed': match.group(2)}
                     listLines.append(dictLine)
                 file.close()
                 return listLines
