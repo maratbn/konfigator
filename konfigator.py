@@ -82,11 +82,12 @@ to search.')
                 sys.exit(1)
             for strItem in listDirItems:
                 strPathItem = strPathDir + os.sep + strItem
-                print strPathItem
                 if os.path.islink(strPathItem):
                     continue
                 if os.path.isdir(strPathItem):
                     _scanDir(strPathItem, depth + 1)
+                elif os.path.isfile(strPathItem):
+                    print strPathItem
 
         _scanDir(self._strAbsPathForKernel)
 
