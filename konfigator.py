@@ -47,7 +47,7 @@ class Konfigator:
         """
         import argparse
         argument_parser = argparse.ArgumentParser(
-                        description='Search the Linux kernel source tree Kconfig files.')
+              description='Search the Linux kernel source tree Kconfig files.')
         argument_parser.add_argument(
             '-k', '--kernel',
             default='/usr/src/linux/',
