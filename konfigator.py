@@ -77,7 +77,7 @@ class Konfigator:
                 file = open(strFilename, 'rU')
                 listLines = list()
                 import re
-                patternLtrim = re.compile(r'^(\s*)(.*)')
+                patternLtrim = re.compile(r'^([ \t]*)(.*)')
                 patternWS = re.compile(r'\s+')
                 for strLine in file:
                     match = patternLtrim.match(strLine)
