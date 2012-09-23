@@ -77,13 +77,17 @@ class Konfigator:
                 file = open(strFilename, 'rU')
                 listLines = list()
                 import re
-                pattern = re.compile(r'^(\s*)(.*)')
+                patternLtrim = re.compile(r'^(\s*)(.*)')
+                patternWS = re.compile(r'\s+')
                 for strLine in file:
-                    match = pattern.match(strLine)
+                    match = patternLtrim.match(strLine)
+                    strLtrimmed = match.group(2)
+                    listTokens = re.split(patternWS, strLtrimmed)
                     dictLine = {
                         'orig': strLine,
                         'indent': len(match.group(1)),
-                        'ltrimmed': match.group(2)}
+                        'ltrimmed': strLtrimmed,
+                        'tokens':listTokens}
                     listLines.append(dictLine)
                 file.close()
                 return listLines
@@ -107,7 +111,7 @@ to search.')
                         print strPathItem
                         listLines = _scanFile(strPathItem)
                         for dictLine in listLines:
-                            print dictLine['indent'], dictLine['orig'],
+                            print dictLine['indent'], dictLine['tokens']
 
         _scanDir(self._strAbsPathForKernel)
 
