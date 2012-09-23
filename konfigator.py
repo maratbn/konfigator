@@ -83,6 +83,8 @@ class Konfigator:
                     match = patternLtrim.match(strLine)
                     strLtrimmed = match.group(2)
                     listTokens = re.split(patternWS, strLtrimmed)
+                    if len(listTokens) == 1 and len(listTokens[0]) == 0:
+                        listTokens = None
                     dictLine = {
                         'orig': strLine,
                         'indent': len(match.group(1)),
