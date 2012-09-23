@@ -73,32 +73,42 @@ class Konfigator:
                     print >> sys.stderr, 'konfigator:  ' + str(o_s_error)
                     return None
 
-            def _scanFile(strFilename):
+            def _processFile(strFilename):
                 """
-                Returns a list of dictionaries corresponding to each line in
-                the file.  Each dictionary includes the original line, its
-                indentation level, its left-trimmed version, and a list of all
-                its tokens.
+                Processes the file specified by the Kconfig file format syntax
+                tokens.
                 """
-                file = open(strFilename, 'rU')
-                listLines = list()
-                import re
-                patternLtrim = re.compile(r'^([ \t]*)(.*)')
-                patternWS = re.compile(r'\s+')
-                for strLine in file:
-                    match = patternLtrim.match(strLine)
-                    strLtrimmed = match.group(2)
-                    listTokens = re.split(patternWS, strLtrimmed)
-                    if len(listTokens) == 1 and len(listTokens[0]) == 0:
-                        listTokens = None
-                    dictLine = {
-                        'orig': strLine,
-                        'indent': len(match.group(1)),
-                        'ltrimmed': strLtrimmed,
-                        'tokens':listTokens}
-                    listLines.append(dictLine)
-                file.close()
-                return listLines
+
+                def _scanFile():
+                    """
+                    Returns a list of dictionaries corresponding to each line
+                    in the file.  Each dictionary includes the original line,
+                    its indentation level, its left-trimmed version, and a list
+                    of all its tokens.
+                    """
+                    file = open(strFilename, 'rU')
+                    listLines = list()
+                    import re
+                    patternLtrim = re.compile(r'^([ \t]*)(.*)')
+                    patternWS = re.compile(r'\s+')
+                    for strLine in file:
+                        match = patternLtrim.match(strLine)
+                        strLtrimmed = match.group(2)
+                        listTokens = re.split(patternWS, strLtrimmed)
+                        if len(listTokens) == 1 and len(listTokens[0]) == 0:
+                            listTokens = None
+                        dictLine = {
+                            'orig': strLine,
+                            'indent': len(match.group(1)),
+                            'ltrimmed': strLtrimmed,
+                            'tokens':listTokens}
+                        listLines.append(dictLine)
+                    file.close()
+                    return listLines
+
+                listLines = _scanFile()
+                for dictLine in listLines:
+                    print dictLine['indent'], dictLine['tokens']
 
             listDirItems = _getDirListing()
             if (depth == 0 and listDirItems is None):
@@ -117,9 +127,7 @@ to search.')
                 elif os.path.isfile(strPathItem):
                     if strItem == 'Kconfig' or strItem.find('Kconfig.') == 0:
                         print strPathItem
-                        listLines = _scanFile(strPathItem)
-                        for dictLine in listLines:
-                            print dictLine['indent'], dictLine['tokens']
+                        _processFile(strPathItem)
 
         _scanDir(self._strAbsPathForKernel)
 
