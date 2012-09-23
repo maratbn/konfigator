@@ -74,6 +74,12 @@ class Konfigator:
                     return None
 
             def _scanFile(strFilename):
+                """
+                Returns a list of dictionaries corresponding to each line in
+                the file.  Each dictionary includes the original line, its
+                indentation level, its left-trimmed version, and a list of all
+                its tokens.
+                """
                 file = open(strFilename, 'rU')
                 listLines = list()
                 import re
