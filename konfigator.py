@@ -149,8 +149,8 @@ class Konfigator:
 
                 def _printLineNodes(listLineNodes):
                     for dictLineNode in listLineNodes:
-                        print ' ' * dictLineNode['line']['indent'], 
-                        print dictLineNode['line']['tokens']
+                        print ((' ' * dictLineNode['line']['indent']) +
+                                          repr(dictLineNode['line']['tokens']))
                         _printLineNodes(dictLineNode['children'])
                 #enddef _printLineNodes(listLineNodes)
 
