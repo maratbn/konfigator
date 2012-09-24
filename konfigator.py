@@ -28,6 +28,7 @@ class Konfigator:
         self._determineCmdArgs()
         self._determineAbsPathForKernel()
         self._scanKconfigFiles()
+    #enddef __init__(self)
 
     def _determineAbsPathForKernel(self):
         """
@@ -38,6 +39,7 @@ class Konfigator:
         import os.path
         self._strAbsPathForKernel = os.path.abspath(
                                                    self._dictCmdArgs['kernel'])
+    #enddef _determineAbsPathForKernel(self)
 
     def _determineCmdArgs(self):
         """
@@ -54,6 +56,7 @@ class Konfigator:
             metavar='path')
         self._namespaceCmdArgs = argument_parser.parse_args()
         self._dictCmdArgs = vars(self._namespaceCmdArgs)
+    #enddef _determineCmdArgs(self)
 
     def _scanKconfigFiles(self):
         """
@@ -72,6 +75,7 @@ class Konfigator:
                     import sys
                     print >> sys.stderr, 'konfigator:  ' + str(o_s_error)
                     return None
+            #enddef _getDirListing()
 
             def _processFile(strFilename):
                 """
@@ -105,6 +109,7 @@ class Konfigator:
                         listLines.append(dictLine)
                     file.close()
                     return listLines
+                #enddef _scanFile()
 
                 listLines = _scanFile()
                 dictLineNodeLast = None
@@ -150,6 +155,7 @@ class Konfigator:
                 #enddef _printLineNodes(listLineNodes)
 
                 _printLineNodes(listLineNodesRoot)
+            #enddef _processFile(strFilename)
 
             listDirItems = _getDirListing()
             if (depth == 0 and listDirItems is None):
@@ -169,7 +175,10 @@ to search.')
                     if strItem == 'Kconfig' or strItem.find('Kconfig.') == 0:
                         print strPathItem
                         _processFile(strPathItem)
+        #enddef _scanDir(strPathDir, depth=0)
 
         _scanDir(self._strAbsPathForKernel)
+    #enddef _scanKconfigFiles(self)
+#endclass Konfigator
 
 Konfigator()
