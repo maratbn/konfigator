@@ -107,8 +107,49 @@ class Konfigator:
                     return listLines
 
                 listLines = _scanFile()
+                dictLineNodeLast = None
+
+                def _determineLineNodeParent(dictLine):
+                    """
+                    Determines what the parent line node should be for the line
+                    specified.
+                    """
+                    if dictLineNodeLast is None:
+                        return None
+                    dictLineNodeLastParent = dictLineNodeLast['parent']
+                    indent = dictLine['indent']
+                    indentLast = dictLineNodeLast['line']['indent']
+                    if indent == indentLast:
+                        return dictLineNodeLastParent
+                    elif indent > indentLast:
+                        return dictLineNodeLast
+                    else:
+                        dictLineNodeAncestor = dictLineNodeLastParent
+                        while (dictLineNodeAncestor and
+                             dictLineNodeAncestor['line']['indent'] >= indent):
+                            dictLineNodeAncestor = (dictLineNodeAncestor
+                                                                    ['parent'])
+                        return dictLineNodeAncestor
+                # enddef _determineLineNodeParent(dictLine)
+
+                listLineNodesRoot = list()
                 for dictLine in listLines:
-                    print dictLine['indent'], dictLine['tokens']
+                    dictLineNodeParent = _determineLineNodeParent(dictLine)
+                    dictLineNode = {'parent': dictLineNodeParent,
+                                          'children': list(), 'line': dictLine}
+                    listAppendTo = (dictLineNodeParent['children']
+                                  if dictLineNodeParent else listLineNodesRoot)
+                    listAppendTo.append(dictLineNode)
+                    dictLineNodeLast = dictLineNode
+
+                def _printLineNodes(listLineNodes):
+                    for dictLineNode in listLineNodes:
+                        print ' ' * dictLineNode['line']['indent'], 
+                        print dictLineNode['line']['tokens']
+                        _printLineNodes(dictLineNode['children'])
+                #enddef _printLineNodes(listLineNodes)
+
+                _printLineNodes(listLineNodesRoot)
 
             listDirItems = _getDirListing()
             if (depth == 0 and listDirItems is None):
