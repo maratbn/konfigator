@@ -114,16 +114,16 @@ class Konfigator:
                 listLines = _scanFile()
                 dictLineNodeLast = None
 
-                def _determineLineNodeParent(dictLine):
+                def _determineLineNodeParent(dictLineNode):
                     """
                     Determines what the parent line node should be for the line
-                    specified.
+                    node specified.
                     """
                     if dictLineNodeLast is None:
                         return None
                     dictLineNodeLastParent = dictLineNodeLast['parent']
-                    indent = dictLine['indent']
-                    indentLast = dictLineNodeLast['line']['indent']
+                    indent = dictLineNode['indent']
+                    indentLast = dictLineNodeLast['indent']
                     if indent == indentLast:
                         return dictLineNodeLastParent
                     elif indent > indentLast:
@@ -131,7 +131,7 @@ class Konfigator:
                     else:
                         dictLineNodeAncestor = dictLineNodeLastParent
                         while (dictLineNodeAncestor and
-                             dictLineNodeAncestor['line']['indent'] >= indent):
+                             dictLineNodeAncestor['indent'] >= indent):
                             dictLineNodeAncestor = (dictLineNodeAncestor
                                                                     ['parent'])
                         return dictLineNodeAncestor
@@ -139,9 +139,15 @@ class Konfigator:
 
                 listLineNodesRoot = list()
                 for dictLine in listLines:
-                    dictLineNodeParent = _determineLineNodeParent(dictLine)
-                    dictLineNode = {'parent': dictLineNodeParent,
-                                          'children': list(), 'line': dictLine}
+                    dictLineNode = {'children': list(), 'line': dictLine}
+                    listLineTokens = dictLine['tokens']
+                    if listLineTokens is None or len(listLineTokens) == 0:
+                        dictLineNode['indent'] = (dictLineNodeLast['indent']
+                                                    if dictLineNodeLast else 0)
+                    else:
+                        dictLineNode['indent'] = dictLine['indent']
+                    dictLineNodeParent = _determineLineNodeParent(dictLineNode)
+                    dictLineNode['parent'] = dictLineNodeParent
                     listAppendTo = (dictLineNodeParent['children']
                                   if dictLineNodeParent else listLineNodesRoot)
                     listAppendTo.append(dictLineNode)
@@ -149,7 +155,7 @@ class Konfigator:
 
                 def _printLineNodes(listLineNodes):
                     for dictLineNode in listLineNodes:
-                        print ((' ' * dictLineNode['line']['indent']) +
+                        print ((' ' * dictLineNode['indent']) +
                                           repr(dictLineNode['line']['tokens']))
                         _printLineNodes(dictLineNode['children'])
                 #enddef _printLineNodes(listLineNodes)
