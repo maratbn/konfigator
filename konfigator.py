@@ -172,7 +172,30 @@ class Konfigator:
                         _printLineNodes(dictLineNode['children'])
                 #enddef _printLineNodes(listLineNodes)
 
-                _printLineNodes(listLineNodesRoot)
+                def _findHelpNode(dictLineNode):
+                    listChildren = dictLineNode['children']
+                    for dictChild in listChildren:
+                        listTokens = dictChild['line']['tokens']
+                        if (listTokens and len(listTokens) > 0 and
+                                (listTokens[0] == 'help' or listTokens[0] ==
+                                                                 '---help---')):
+                            return dictChild
+                        dictHelpFound = _findHelpNode(dictChild)
+                        if dictHelpFound:
+                            return dictHelpFound
+                    return None
+                #enddef _findHelpNode(dictLineNode)
+
+                listConfigs = list()
+                for dictLineNode in listLineNodesRoot:
+                    listTokens = dictLineNode['line']['tokens']
+                    if (not listTokens or len(listTokens) == 0 or
+                                                    listTokens[0] != 'config'):
+                        continue
+                    
+                    print dictLineNode['line']
+                    print _findHelpNode(dictLineNode)
+                    print
             #enddef _processFile(strFilename)
 
             listDirItems = _getDirListing()
