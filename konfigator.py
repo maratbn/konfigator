@@ -191,7 +191,6 @@ class Konfigator:
                     if (not listTokens or len(listTokens) == 0 or
                                                     listTokens[0] != 'config'):
                         continue
-                    
                     print dictLineNode['line']
                     print _findHelpNode(dictLineNode)
                     print
