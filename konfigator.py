@@ -163,8 +163,6 @@ class Konfigator:
                     return listLineNodesRoot
                 #enddef _processLinesIntoLineNodes()
 
-                listLineNodesRoot = _processLinesIntoLineNodes(_scanFile())
-
                 def _printLineNodes(listLineNodes):
                     for dictLineNode in listLineNodes:
                         print ((' ' * dictLineNode['indent']) +
@@ -186,6 +184,7 @@ class Konfigator:
                     return None
                 #enddef _findHelpNode(dictLineNode)
 
+                listLineNodesRoot = _processLinesIntoLineNodes(_scanFile())
                 listConfigs = list()
                 for dictLineNode in listLineNodesRoot:
                     listTokens = dictLineNode['line']['tokens']
