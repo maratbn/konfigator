@@ -47,7 +47,7 @@ class Konfigator:
         argument_parser.add_argument(
             '-s', '--search',
             required=True,
-            help='string to search for in the descriptions',
+            help='string to search for in the descriptions, can be in quotes',
             metavar='string')
         self._namespaceCmdArgs = argument_parser.parse_args()
         self._dictCmdArgs = vars(self._namespaceCmdArgs)
