@@ -27,20 +27,9 @@ class Konfigator:
 
     def __init__(self):
         self._determineCmdArgs()
-        self._determineAbsPathForKernel()
+        self._processCmdArgs()
         self._scanKconfigFiles()
     #enddef __init__(self)
-
-    def _determineAbsPathForKernel(self):
-        """
-        Determines the absolute path to the linux kernel sources based on the
-        value specified via command line args, and saves it to the field
-        '_strAbsPathForKernel'.
-        """
-        import os.path
-        self._strAbsPathForKernel = os.path.abspath(
-                                                   self._dictCmdArgs['kernel'])
-    #enddef _determineAbsPathForKernel(self)
 
     def _determineCmdArgs(self):
         """
@@ -63,6 +52,20 @@ class Konfigator:
         self._namespaceCmdArgs = argument_parser.parse_args()
         self._dictCmdArgs = vars(self._namespaceCmdArgs)
     #enddef _determineCmdArgs(self)
+
+    def _processCmdArgs(self):
+        """
+        Determines and processes various command line arguments and saves them
+        as class fields.
+        """
+        import os.path
+        self._strAbsPathForKernel = os.path.abspath(
+                                                   self._dictCmdArgs['kernel'])
+        import re
+        strSearch = re.sub(r'\\', '\\\\', self._dictCmdArgs['search'])
+        strSearch = re.sub(r'\s+', '\\s', strSearch)
+        self._patternSearch = re.compile(strSearch, re.IGNORECASE)
+    #enddef _processCmdArgs(self)
 
     def _scanKconfigFiles(self):
         """
@@ -212,9 +215,11 @@ class Konfigator:
                     listHelpTrimmed = list()
                     for strHelp in listHelp:
                         listHelpTrimmed.append(strHelp[indentLowest:])
-                    print dictLineNode['line']
-                    print ''.join(listHelpTrimmed)
-                    print
+                    strHelpTrimmed = ''.join(listHelpTrimmed)
+                    if self._patternSearch.match(strHelpTrimmed):
+                        print dictLineNode['line']['ltrimmed']
+                        print strHelpTrimmed
+                        print
             #enddef _processFile(strFilename)
 
             listDirItems = _getDirListing()
