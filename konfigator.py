@@ -217,6 +217,7 @@ class Konfigator:
                         listHelpTrimmed.append(strHelp[indentLowest:])
                     strHelpTrimmed = ''.join(listHelpTrimmed)
                     if self._patternSearch.match(strHelpTrimmed):
+                        print strFilename
                         print dictLineNode['line']['ltrimmed']
                         print strHelpTrimmed
                         print
@@ -238,7 +239,6 @@ to search.')
                     _scanDir(strPathItem, depth + 1)
                 elif os.path.isfile(strPathItem):
                     if strItem == 'Kconfig' or strItem.find('Kconfig.') == 0:
-                        print strPathItem
                         _processFile(strPathItem)
         #enddef _scanDir(strPathDir, depth=0)
 
