@@ -196,10 +196,19 @@ class Konfigator:
                         continue
                     listHelp = list()
                     listHelpNodeChildren = dictHelpNodeParent['children']
+                    indentLowest = None
                     for dictHelpNodeChild in listHelpNodeChildren:
+                        indentHelpNodeChild = dictHelpNodeChild['indent']
+                        if indentLowest == None:
+                            indentLowest = indentHelpNodeChild
+                        elif indentHelpNodeChild < indentLowest:
+                            indentLowest = indentHelpNodeChild
                         listHelp.append(dictHelpNodeChild['line']['orig'])
+                    listHelpTrimmed = list()
+                    for strHelp in listHelp:
+                        listHelpTrimmed.append(strHelp[indentLowest:])
                     print dictLineNode['line']
-                    print ''.join(listHelp)
+                    print ''.join(listHelpTrimmed)
                     print
             #enddef _processFile(strFilename)
 
