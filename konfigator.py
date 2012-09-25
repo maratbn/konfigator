@@ -191,10 +191,10 @@ class Konfigator:
                     if (not listTokens or len(listTokens) == 0 or
                                                     listTokens[0] != 'config'):
                         continue
-                    listHelp = list()
                     dictHelpNodeParent = _findHelpNode(dictLineNode)
                     if not dictHelpNodeParent:
                         continue
+                    listHelp = list()
                     listHelpNodeChildren = dictHelpNodeParent['children']
                     for dictHelpNodeChild in listHelpNodeChildren:
                         listHelp.append(dictHelpNodeChild['line']['orig'])
