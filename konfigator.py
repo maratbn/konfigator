@@ -55,6 +55,11 @@ class Konfigator:
             default='/usr/src/linux/',
             help='path to the Linux kernel source tree to search (default: %(default)s)',
             metavar='path')
+        argument_parser.add_argument(
+            '-s', '--search',
+            required=True,
+            help='string to search for in the descriptions',
+            metavar='string')
         self._namespaceCmdArgs = argument_parser.parse_args()
         self._dictCmdArgs = vars(self._namespaceCmdArgs)
     #enddef _determineCmdArgs(self)
