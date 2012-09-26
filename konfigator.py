@@ -105,6 +105,7 @@ can be in quotes',
                     import re
                     patternLtrim = re.compile(r'^([ \t]*)(.*)')
                     patternWS = re.compile(r'\s+')
+                    numLine = 1
                     for strLine in file:
                         match = patternLtrim.match(strLine)
                         strLtrimmed = match.group(2)
@@ -112,11 +113,13 @@ can be in quotes',
                         if len(listTokens) == 1 and len(listTokens[0]) == 0:
                             listTokens = None
                         dictLine = {
+                            'num': numLine,
                             'orig': strLine,
                             'indent': len(match.group(1)),
                             'ltrimmed': strLtrimmed,
                             'tokens':listTokens}
                         listLines.append(dictLine)
+                        numLine += 1
                     file.close()
                     return listLines
                 #enddef _scanFile()
@@ -220,8 +223,9 @@ can be in quotes',
                     strHelpTrimmed = ''.join(listHelpTrimmed)
                     if (self._patternSearch.match(strConfig) or
                                     self._patternSearch.match(strHelpTrimmed)):
+                        dictLine = dictLineNode['line']
                         print strFilename
-                        print dictLineNode['line']['ltrimmed']
+                        print dictLine['num'], dictLine['ltrimmed']
                         print strHelpTrimmed
                         print
             #enddef _processFile(strFilename)
