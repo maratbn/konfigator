@@ -47,7 +47,8 @@ class Konfigator:
         argument_parser.add_argument(
             '-s', '--search',
             required=True,
-            help='string to search for in the descriptions, can be in quotes',
+            help='string to search for in the config tokens and descriptions, \
+can be in quotes',
             metavar='string')
         self._namespaceCmdArgs = argument_parser.parse_args()
         self._dictCmdArgs = vars(self._namespaceCmdArgs)
@@ -199,6 +200,7 @@ class Konfigator:
                     if (not listTokens or len(listTokens) == 0 or
                                                     listTokens[0] != 'config'):
                         continue
+                    strConfig = listTokens[1] if len(listTokens) > 1 else ''
                     dictHelpNodeParent = _findHelpNode(dictLineNode)
                     if not dictHelpNodeParent:
                         continue
@@ -216,7 +218,8 @@ class Konfigator:
                     for strHelp in listHelp:
                         listHelpTrimmed.append(strHelp[indentLowest:])
                     strHelpTrimmed = ''.join(listHelpTrimmed)
-                    if self._patternSearch.match(strHelpTrimmed):
+                    if (self._patternSearch.match(strConfig) or
+                                    self._patternSearch.match(strHelpTrimmed)):
                         print strFilename
                         print dictLineNode['line']['ltrimmed']
                         print strHelpTrimmed
