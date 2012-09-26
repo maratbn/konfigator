@@ -22,6 +22,9 @@
 #   along with Konfigator.  If not, see <http://www.gnu.org/licenses/>.
 
 
+from __future__ import print_function
+
+
 class Konfigator:
 
 
@@ -83,7 +86,7 @@ can be in quotes',
                     return listDir
                 except OSError as o_s_error:
                     import sys
-                    print >> sys.stderr, 'konfigator:  ' + str(o_s_error)
+                    print('konfigator:  ' + str(o_s_error), file=sys.stderr)
                     return None
             #enddef _getDirListing()
 
@@ -177,7 +180,7 @@ can be in quotes',
 
                 def _printLineNodes(listLineNodes):
                     for dictLineNode in listLineNodes:
-                        print ((' ' * dictLineNode['indent']) +
+                        print((' ' * dictLineNode['indent']) +
                                           repr(dictLineNode['line']['tokens']))
                         _printLineNodes(dictLineNode['children'])
                 #enddef _printLineNodes(listLineNodes)
@@ -232,20 +235,20 @@ can be in quotes',
                     if (self._patternSearch.match(strConfig) or
                                     self._patternSearch.match(strHelpTrimmed)):
                         dictLine = dictLineNode['line']
-                        print strFilename
-                        print (repr(dictLine['num']) + ':  ' +
+                        print(strFilename)
+                        print(repr(dictLine['num']) + ':  ' +
                                                           dictLine['ltrimmed'])
-                        print strHelpTrimmedNum
-                        print
+                        print(strHelpTrimmedNum)
+                        print()
             #enddef _processFile(strFilename)
 
             listDirItems = _getDirListing()
             if (depth == 0 and listDirItems is None):
                 import sys
-                print >> sys.stderr, ('konfigator:  Encountered an operating \
-system error while attempting to open the path \'' + self._strAbsPathForKernel
-+ '\'.  Make sure to specify the correct path to the Linux kernel source tree \
-to search.')
+                print('konfigator:  Encountered an operating system error \
+while attempting to open the path \'' + self._strAbsPathForKernel + '\'.  \
+Make sure to specify the correct path to the Linux kernel source tree to \
+search.', file=sys.stderr)
                 sys.exit(1)
             for strItem in listDirItems:
                 strPathItem = strPathDir + os.sep + strItem
