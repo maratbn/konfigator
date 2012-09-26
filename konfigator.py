@@ -207,7 +207,7 @@ can be in quotes',
                     dictHelpNodeParent = _findHelpNode(dictLineNode)
                     if not dictHelpNodeParent:
                         continue
-                    listHelp = list()
+                    listLinesHelp = list()
                     listHelpNodeChildren = dictHelpNodeParent['children']
                     indentLowest = None
                     for dictHelpNodeChild in listHelpNodeChildren:
@@ -216,18 +216,26 @@ can be in quotes',
                             indentLowest = indentHelpNodeChild
                         elif indentHelpNodeChild < indentLowest:
                             indentLowest = indentHelpNodeChild
-                        listHelp.append(dictHelpNodeChild['line']['orig'])
+                        listLinesHelp.append(dictHelpNodeChild['line'])
                     listHelpTrimmed = list()
-                    for strHelp in listHelp:
-                        listHelpTrimmed.append(strHelp[indentLowest:])
+                    listHelpTrimmedNum = list()
+                    for dictLineHelp in listLinesHelp:
+                        strHelpOrig = dictLineHelp['orig']
+                        strHelp = strHelpOrig[indentLowest:]
+                        if len(strHelp) == 0:
+                            strHelp = strHelpOrig
+                        listHelpTrimmed.append(strHelp)
+                        listHelpTrimmedNum.append(repr(dictLineHelp['num']) +
+                                              ':    ' + strHelp)
                     strHelpTrimmed = ''.join(listHelpTrimmed)
+                    strHelpTrimmedNum = ''.join(listHelpTrimmedNum)
                     if (self._patternSearch.match(strConfig) or
                                     self._patternSearch.match(strHelpTrimmed)):
                         dictLine = dictLineNode['line']
                         print strFilename
                         print (repr(dictLine['num']) + ':  ' +
                                                           dictLine['ltrimmed'])
-                        print strHelpTrimmed
+                        print strHelpTrimmedNum
                         print
             #enddef _processFile(strFilename)
 
