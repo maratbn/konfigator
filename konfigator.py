@@ -65,7 +65,7 @@ can be in quotes',
         import re
         strSearch = re.sub(r'\\', '\\\\', self._dictCmdArgs['search'])
         strSearch = re.sub(r'\s+', '\\s', strSearch)
-        self._patternSearch = re.compile(strSearch, re.IGNORECASE)
+        self._patternSearch = re.compile('.*' + strSearch + '.*', re.IGNORECASE)
     #enddef _processCmdArgs(self)
 
     def _scanKconfigFiles(self):
