@@ -225,7 +225,8 @@ can be in quotes',
                                     self._patternSearch.match(strHelpTrimmed)):
                         dictLine = dictLineNode['line']
                         print strFilename
-                        print dictLine['num'], dictLine['ltrimmed']
+                        print (repr(dictLine['num']) + ':  ' +
+                                                          dictLine['ltrimmed'])
                         print strHelpTrimmed
                         print
             #enddef _processFile(strFilename)
