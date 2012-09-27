@@ -103,7 +103,7 @@ can be in quotes',
                     its indentation level, its left-trimmed version, and a list
                     of all its tokens.
                     """
-                    file = open(strFilename, 'rU')
+                    file = open(strFilename, 'rU', errors='ignore')
                     listLines = list()
                     import re
                     patternLtrim = re.compile(r'^([ \t]*)(.*)')
