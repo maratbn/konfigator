@@ -3,7 +3,7 @@
 #   Konfigator -- Searches the Linux kernel source tree Kconfig files.
 #   https://github.com/maratbn/Konfigator/
 #
-#   Version: 0.1
+#   Version: 0.1.1
 #
 #   Copyright (C) 2012  Marat Nepomnyashy  http://maratbn.com  maratbn@gmail
 #
@@ -59,7 +59,7 @@ can be in quotes',
         argument_parser.add_argument(
             '--version',
             action='version',
-            version='%(prog)s 0.1')
+            version='%(prog)s 0.1.1')
         self._namespaceCmdArgs = argument_parser.parse_args()
         self._dictCmdArgs = vars(self._namespaceCmdArgs)
     #enddef _determineCmdArgs(self)
