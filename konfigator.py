@@ -56,6 +56,10 @@ class Konfigator:
             help='string to search for in the config tokens and descriptions, \
 can be in quotes',
             metavar='string')
+        argument_parser.add_argument(
+            '--version',
+            action='version',
+            version='%(prog)s 0.1')
         self._namespaceCmdArgs = argument_parser.parse_args()
         self._dictCmdArgs = vars(self._namespaceCmdArgs)
     #enddef _determineCmdArgs(self)
