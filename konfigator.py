@@ -75,6 +75,7 @@ can be in quotes',
         import re
         strSearch = re.sub(r'\\', '\\\\', self._dictCmdArgs['search'])
         strSearch = re.sub(r'\s+', '\\s', strSearch)
+        strSearch = re.sub(r'^CONFIG_', '', strSearch)
         self._patternSearch = re.compile('.*' + strSearch + '.*', re.IGNORECASE)
     #enddef _processCmdArgs(self)
 
