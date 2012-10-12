@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 #   Konfigator -- Searches the Linux kernel source tree Kconfig files.
+#   https://github.com/maratbn/Konfigator/
 #
 #   Copyright (C) 2012  Marat Nepomnyashy  http://maratbn.com  maratbn@gmail
 #
