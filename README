@@ -6,11 +6,11 @@ Licensed under the GNU General Public License Version 3.
 
 
 Konfigator utility can search both the Linux kernel config macro definitions
-and descriptions in 'Kconfig' files under the default path '/usr/src/linux',
-or under any other path specified.
+and the descriptions in 'Kconfig' files under the default path
+'/usr/src/linux', or under any other path specified.
 
-(The kernel 'menuconfig' utility can currently search only kernel config macro
-definitions, but not the descriptions.)
+(The kernel 'menuconfig' utility can currently search only the kernel config
+macro definitions, but not the descriptions.)
 
 
 Command line:
