@@ -14,6 +14,9 @@ and the descriptions in 'Kconfig' files under the default path
 macro definitions, but not the descriptions.)
 
 
+System requirements:  /usr/bin/python version 2.7+
+
+
 Command line:
 
 usage: konfigator.py [-h] [-k path] -s string
