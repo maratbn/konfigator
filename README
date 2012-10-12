@@ -16,6 +16,11 @@ and the descriptions in 'Kconfig' files under the default path
 macro definitions, but not the descriptions.)
 
 
+Installation instructions:
+
+# cp -i ./konfigator.py /usr/bin/
+
+
 Command line:
 
 usage: konfigator.py [-h] [-k path] -s string [--version]
