@@ -3,6 +3,8 @@
 #   Konfigator -- Searches the Linux kernel source tree Kconfig files.
 #   https://github.com/maratbn/Konfigator/
 #
+#   Version: 0.1
+#
 #   Copyright (C) 2012  Marat Nepomnyashy  http://maratbn.com  maratbn@gmail
 #
 #   Licensed under the GNU General Public License Version 3.
