@@ -18,7 +18,7 @@ macro definitions, but not the descriptions.)
 
 Command line:
 
-usage: konfigator.py [-h] [-k path] -s string
+usage: konfigator.py [-h] [-k path] -s string [--version]
 
 optional arguments:
   --help                show this help message and exit
@@ -28,6 +28,7 @@ optional arguments:
   -s string, --search string
                         string to search for in the config tokens and
                         descriptions, can be in quotes
+  --version             show program's version number and exit
 
 
 Example usage:
