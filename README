@@ -1,0 +1,248 @@
+Konfigator -- Searches the Linux kernel source tree Kconfig files.
+
+Copyright (C) 2012  Marat Nepomnyashy  http://maratbn.com  maratbn@gmail
+
+Licensed under the GNU General Public License Version 3.
+
+
+Konfigator utility can search both the Linux kernel config macro definitions
+and descriptions in 'Kconfig' files under the default path '/usr/src/linux',
+or under any other path specified.
+
+(The kernel 'menuconfig' utility can currently search only kernel config macro
+definitions, but not the descriptions.)
+
+
+Command line:
+
+usage: konfigator.py [-h] [-k path] -s string
+
+optional arguments:
+  --help                show this help message and exit
+  -k path, --kernel path
+                        path to the Linux kernel source tree to search
+                        (default: /usr/src/linux/)
+  -s string, --search string
+                        string to search for in the config tokens and
+                        descriptions, can be in quotes
+
+
+Example usage:
+
+$ konfigator.py -s bluetooth
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+5:  config BT_HCIBTUSB
+9:    Bluetooth HCI USB driver.
+10:    This driver is required if you want to use Bluetooth devices with
+11:    USB interface.
+12:    
+13:    Say Y here to compile support for Bluetooth USB devices into the
+14:    kernel or say M to compile it as module (btusb).
+15:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+16:  config BT_HCIBTSDIO
+20:    Bluetooth HCI SDIO driver.
+21:    This driver is required if you want to use Bluetooth device with
+22:    SDIO interface.
+23:    
+24:    Say Y here to compile support for Bluetooth SDIO devices into the
+25:    kernel or say M to compile it as module (btsdio).
+26:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+27:  config BT_HCIUART
+30:    Bluetooth HCI UART driver.
+31:    This driver is required if you want to use Bluetooth devices with
+32:    serial port interface. You will also need this driver if you have 
+33:    UART based Bluetooth PCMCIA and CF devices like Xircom Credit Card 
+34:    adapter and BrainBoxes Bluetooth PC Card.
+35:    
+36:    Say Y here to compile support for Bluetooth UART devices into the
+37:    kernel or say M to compile it as module (hci_uart).
+38:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+39:  config BT_HCIUART_H4
+43:    UART (H4) is serial protocol for communication between Bluetooth 
+44:    device and host. This protocol is required for most Bluetooth devices 
+45:    with UART interface, including PCMCIA and CF cards. 
+46:    
+47:    Say Y here to compile support for HCI UART (H4) protocol.
+48:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+84:  config BT_HCIBCM203X
+89:    Bluetooth HCI BCM203x USB driver.
+90:    This driver provides the firmware loading mechanism for the Broadcom
+91:    Blutonium based devices.
+92:    
+93:    Say Y here to compile support for HCI BCM203x devices into the
+94:    kernel or say M to compile it as module (bcm203x).
+95:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+96:  config BT_HCIBPA10X
+100:    Bluetooth HCI BPA10x USB driver.
+101:    This driver provides support for the Digianswer BPA 100/105 Bluetooth
+102:    sniffer devices.
+103:    
+104:    Say Y here to compile support for HCI BPA10x devices into the
+105:    kernel or say M to compile it as module (bpa10x).
+106:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+107:  config BT_HCIBFUSB
+112:    Bluetooth HCI BlueFRITZ! USB driver.
+113:    This driver provides support for Bluetooth USB devices with AVM
+114:    interface:
+117:    Say Y here to compile support for HCI BFUSB devices into the
+118:    kernel or say M to compile it as module (bfusb).
+119:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+120:  config BT_HCIDTL1
+124:    Bluetooth HCI DTL1 (PC Card) driver.
+125:    This driver provides support for Bluetooth PCMCIA devices with
+126:    Nokia DTL1 interface:
+130:    Say Y here to compile support for HCI DTL1 devices into the
+131:    kernel or say M to compile it as module (dtl1_cs).
+132:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+133:  config BT_HCIBT3C
+138:    Bluetooth HCI BT3C (PC Card) driver.
+139:    This driver provides support for Bluetooth PCMCIA devices with
+140:    3Com BT3C interface:
+144:    Say Y here to compile support for HCI BT3C devices into the
+145:    kernel or say M to compile it as module (bt3c_cs).
+146:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+147:  config BT_HCIBLUECARD
+151:    Bluetooth HCI BlueCard (PC Card) driver.
+152:    This driver provides support for Bluetooth PCMCIA devices with
+153:    Anycom BlueCard interface:
+157:    Say Y here to compile support for HCI BlueCard devices into the
+158:    kernel or say M to compile it as module (bluecard_cs).
+159:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+160:  config BT_HCIBTUART
+164:    Bluetooth HCI UART (PC Card) driver.
+165:    This driver provides support for Bluetooth PCMCIA devices with
+166:    an UART interface:
+173:    Say Y here to compile support for HCI UART devices into the
+174:    kernel or say M to compile it as module (btuart_cs).
+175:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+176:  config BT_HCIVHCI
+179:    Bluetooth Virtual HCI device driver.
+180:    This driver is required if you want to use HCI Emulation software.
+181:    
+182:    Say Y here to compile support for virtual HCI devices into the
+183:    kernel or say M to compile it as module (hci_vhci).
+184:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+185:  config BT_MRVL
+188:    The core driver to support Marvell Bluetooth devices.
+189:    
+190:    This driver is required if you want to support
+191:    Marvell Bluetooth devices, such as 8688/8787/8797.
+192:    
+193:    Say Y here to compile Marvell Bluetooth driver
+194:    into the kernel or say M to compile it as module.
+195:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+196:  config BT_MRVL_SDIO
+201:    The driver for Marvell Bluetooth chipsets with SDIO interface.
+202:    
+203:    This driver is required if you want to use Marvell Bluetooth
+204:    devices with SDIO interface. Currently SD8688/SD8787/SD8797
+205:    chipsets are supported.
+206:    
+207:    Say Y here to compile support for Marvell BT-over-SDIO driver
+208:    into the kernel or say M to compile it as module.
+209:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+210:  config BT_ATH3K
+215:    Bluetooth firmware download driver.
+216:    This driver loads the firmware into the Atheros Bluetooth
+217:    chipset.
+218:    
+219:    Say Y here to compile support for "Atheros firmware download driver"
+220:    into the kernel or say M to compile it as module (ath3k).
+221:    
+
+
+/usr/src/linux/drivers/bluetooth/Kconfig
+222:  config BT_WILINK
+226:    This enables the Bluetooth driver for Texas Instrument's BT/FM/GPS
+227:    combo devices. This makes use of shared transport line discipline
+228:    core driver to communicate with the BT core of the combo chip.
+229:    
+230:    Say Y here to compile support for Texas Instrument's WiLink7 driver
+231:    into the kernel or say M to compile it as module.
+
+
+/usr/src/linux/drivers/platform/x86/Kconfig
+173:  config TC1100_WMI
+180:    This is a driver for the WMI extensions (wireless and bluetooth power
+181:    control) of the HP Compaq TC1100 tablet.
+182:    
+
+
+/usr/src/linux/drivers/platform/x86/Kconfig
+607:  config TOSHIBA_BT_RFKILL
+611:    This driver adds support for Bluetooth events for the RFKill
+612:    switch on modern Toshiba laptops with full ACPI support and
+613:    an RFKill switch.
+614:    
+615:    This driver handles RFKill events for the TOS6205 Bluetooth,
+616:    and re-enables it when the switch is set back to the 'on'
+617:    position.
+618:    
+619:    If you have a modern Toshiba laptop with a Bluetooth and an
+620:    RFKill switch (such as the Portege R500), say Y.
+621:    
+
+
+/usr/src/linux/drivers/usb/serial/Kconfig
+59:  config USB_SERIAL_AIRCABLE
+62:    Say Y here if you want to use USB AIRcable Bluetooth Dongle.
+63:    
+64:    To compile this driver as a module, choose M here: the module
+65:    will be called aircable.
+66:    
+
+
+/usr/src/linux/net/bluetooth/bnep/Kconfig
+1:  config BT_BNEP
+6:    BNEP (Bluetooth Network Encapsulation Protocol) is Ethernet
+7:    emulation layer on top of Bluetooth.  BNEP is required for
+8:    Bluetooth PAN (Personal Area Network).
+9:    
+10:    Say Y here to compile BNEP support into the kernel or say M to
+11:    compile it as module (bnep).
+12:    
+
+
