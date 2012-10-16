@@ -235,7 +235,7 @@ can be in quotes',
                     strHelpTrimmed = ''.join(listHelpTrimmed)
                     strHelpTrimmedNum = ''.join(listHelpTrimmedNum)
                     if (self._patternSearch.match(strConfig) or
-                                    self._patternSearch.match(strHelpTrimmed)):
+                                   self._patternSearch.search(strHelpTrimmed)):
                         dictLine = dictLineNode['line']
                         print(strFilename)
                         print(repr(dictLine['num']) + ':  ' +
