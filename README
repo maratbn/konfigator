@@ -34,7 +34,7 @@ optional arguments:
 
 Example usage:
 
-$ konfigator.py -s bluetooth usb
+$ konfigator.py -s bluetooth usb "this driver"
 
 /usr/src/linux/drivers/bluetooth/Kconfig
 5:  config BT_HCIBTUSB
@@ -45,17 +45,6 @@ $ konfigator.py -s bluetooth usb
 13:    Say Y here to compile support for Bluetooth USB devices into the
 14:    kernel or say M to compile it as module (btusb).
 15:    
-
-
-/usr/src/linux/drivers/bluetooth/Kconfig
-49:  config BT_HCIUART_BCSP
-54:    BCSP (BlueCore Serial Protocol) is serial protocol for communication 
-55:    between Bluetooth device and host. This protocol is required for non
-56:    USB Bluetooth devices based on CSR BlueCore chip, including PCMCIA and
-57:    CF cards.
-58:    
-59:    Say Y here to compile support for HCI BCSP protocol.
-60:    
 
 
 /usr/src/linux/drivers/bluetooth/Kconfig
@@ -88,24 +77,6 @@ $ konfigator.py -s bluetooth usb
 117:    Say Y here to compile support for HCI BFUSB devices into the
 118:    kernel or say M to compile it as module (bfusb).
 119:    
-
-
-/usr/src/linux/drivers/hid/Kconfig
-7:  config HID
-12:    A human interface device (HID) is a type of computer device that
-13:    interacts directly with and takes input from humans. The term "HID"
-14:    most commonly used to refer to the USB-HID specification, but other
-15:    devices (such as, but not strictly limited to, Bluetooth) are
-16:    designed using HID specification (this involves certain keyboards,
-17:    mice, tablets, etc). This option adds the HID bus to the kernel,
-18:    together with generic HID layer code. The HID devices are added and
-19:    removed from the HID bus by the transport-layer drivers, such as
-20:    usbhid (USB_HID) and hidp (BT_HIDP).
-21:    
-22:    For docs and specs, see http://www.usb.org/developers/hidpage/
-23:    
-24:    If unsure, say Y.
-25:    
 
 
 /usr/src/linux/drivers/usb/serial/Kconfig
