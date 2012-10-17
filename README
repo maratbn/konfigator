@@ -33,10 +33,10 @@ optional arguments:
   -k path, --kernel path
                         path to the Linux kernel source tree to search
                         (default: /usr/src/linux/)
-  -s string, --search string
-                        string to search for in the config tokens and
-                        descriptions, can be in quotes
-  --version             show program's version number and exit
+  -s [string [string ...]], --search [string [string ...]]
+                        terms to search for in the config tokens and
+                        descriptions, sentences can be in quotes, only entries
+                        matching ALL terms will be returned
 
 
 Example usage:
