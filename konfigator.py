@@ -55,7 +55,8 @@ class Konfigator:
             required=True,
             help='string to search for in the config tokens and descriptions, \
 can be in quotes',
-            metavar='string')
+            metavar='string',
+            nargs='*')
         argument_parser.add_argument(
             '--version',
             action='version',
@@ -72,11 +73,17 @@ can be in quotes',
         import os.path
         self._strAbsPathForKernel = os.path.abspath(
                                                    self._dictCmdArgs['kernel'])
+        listSearch = self._dictCmdArgs['search']
+        if listSearch is None:
+            return
+        self._listSearchPatterns = []
         import re
-        strSearch = re.sub(r'\\', '\\\\', self._dictCmdArgs['search'])
-        strSearch = re.sub(r'\s+', '\\s', strSearch)
-        strSearch = re.sub(r'^CONFIG_', '', strSearch)
-        self._patternSearch = re.compile('.*' + strSearch + '.*', re.IGNORECASE)
+        for strSearch in listSearch:
+            strSearch = re.sub(r'\\', '\\\\', strSearch)
+            strSearch = re.sub(r'\s+', '\\s', strSearch)
+            strSearch = re.sub(r'^CONFIG_', '', strSearch)
+            patternSearch = re.compile('.*' + strSearch + '.*', re.IGNORECASE)
+            self._listSearchPatterns.append(patternSearch)
     #enddef _processCmdArgs(self)
 
     def _scanKconfigFiles(self):
@@ -207,6 +214,8 @@ can be in quotes',
                     return None
                 #enddef _findHelpNode(dictLineNode)
 
+                if self._listSearchPatterns is None:
+                    return
                 listLineNodesRoot = _processLinesIntoLineNodes(_scanFile())
                 listConfigs = list()
                 for dictLineNode in listLineNodesRoot:
@@ -240,8 +249,13 @@ can be in quotes',
                                               ':    ' + strHelp)
                     strHelpTrimmed = ''.join(listHelpTrimmed)
                     strHelpTrimmedNum = ''.join(listHelpTrimmedNum)
-                    if (self._patternSearch.match(strConfig) or
-                                    self._patternSearch.match(strHelpTrimmed)):
+                    flagCompleteMatch = True
+                    for patternSearch in self._listSearchPatterns:
+                        if not (patternSearch.match(strConfig) or
+                                         patternSearch.search(strHelpTrimmed)):
+                            flagCompleteMatch = False
+                            break
+                    if flagCompleteMatch:
                         dictLine = dictLineNode['line']
                         print(strFilename)
                         print(repr(dictLine['num']) + ':  ' +
