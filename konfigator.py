@@ -51,8 +51,8 @@ class Konfigator:
         argument_parser.add_argument(
             '-s', '--search',
             required=True,
-            help='string to search for in the config tokens and descriptions, \
-can be in quotes',
+            help='terms to search for in the config tokens and descriptions, \
+sentences can be in quotes, only entries matching ALL terms will be returned',
             metavar='string',
             nargs='*')
         self._namespaceCmdArgs = argument_parser.parse_args()
